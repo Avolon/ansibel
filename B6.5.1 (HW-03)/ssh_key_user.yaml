@@ -1,5 +1,3 @@
----
-----
 - name: Создание пользователя и настройка SSH-ключа
   hosts: your_host
   become: yes
@@ -21,7 +19,7 @@
 
     - name: Установка SSH-ключа для пользователя user1
       copy:
-        content: "{{ lookup('file', 'user1_key') }}"
+        content: "{{ lookup('file', './ansible/user1_key') }}"
         dest: /home/user1/.ssh/id_rsa
         owner: user1
         group: user1
