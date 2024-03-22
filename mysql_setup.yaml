@@ -1,0 +1,16 @@
+---
+- name: Установка и запуск MySQL-сервера на группе tedt
+  hosts: test
+  become: yes  # Используем привилегированные права для выполнения команд
+
+  tasks:
+    - name: Установка MySQL-сервера
+      apt:
+        name: mysql-server
+        state: present
+
+    - name: Запуск сервиса MySQL
+      service:
+        name: mysql
+        state: started
+        enabled: yes
