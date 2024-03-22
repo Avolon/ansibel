@@ -1,0 +1,14 @@
+- name: Установка и запуск FTP-сервера vsftpd
+  hosts: your_ftp_servers
+  become: true
+  tasks:
+    - name: Установка vsftpd
+      apt:
+        name: vsftpd
+        state: present
+
+    - name: Запуск vsftpd
+      service:
+        name: vsftpd
+        state: started
+        enabled: yes
