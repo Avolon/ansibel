@@ -1,0 +1,7 @@
+---
+- name: Применение роли dnsmasq
+  hosts: test
+  become: yes  # Подключаемся под пользователем с правами администратора
+
+  roles:
+    - dnsmasq

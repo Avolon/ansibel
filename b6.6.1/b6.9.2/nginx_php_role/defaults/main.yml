@@ -1,0 +1,2 @@
+---
+nginx_document_root: /opt/nginx/ansible

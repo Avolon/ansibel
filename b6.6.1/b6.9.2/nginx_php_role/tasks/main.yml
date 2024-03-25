@@ -1,0 +1,13 @@
+---
+- name: Create /opt/nginx/ansible directory
+  file:
+    path: /opt/nginx/ansible
+    state: directory
+    mode: '0755'  # Подходящие права доступа
+    owner: www-data  # Пользователь, владеющий директорией
+    group: www-data  # Группа, владеющая директорией
+
+- import_tasks: install_nginx.yml
+- import_tasks: install_php_fpm.yml
+- import_tasks: create_php_info_page.yml
+- import_tasks: update_nginx_config.yml

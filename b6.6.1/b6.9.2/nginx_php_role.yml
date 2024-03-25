@@ -1,0 +1,16 @@
+---
+- name: Настройка веб-сервера с PHP
+  hosts: test
+  become: yes
+
+  tasks:
+    - name: Create symlink to index.php in /opt/nginx/ansible
+      file:
+        src: /var/www/html/index.php
+        dest: /opt/nginx/ansible/index.php
+        state: link
+
+    - name: Применение роли nginx_php_role
+      include_role:
+        name: nginx_php_role
+

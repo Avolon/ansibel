@@ -1,0 +1,6 @@
+---
+- name: Set DocumentRoot for Nginx
+  template:
+    src: nginx_site.conf.j2
+    dest: /etc/nginx/sites-available/default
+  notify: Reload Nginx

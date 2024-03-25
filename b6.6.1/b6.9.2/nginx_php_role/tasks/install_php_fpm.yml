@@ -1,0 +1,14 @@
+- name: Install PHP and PHP-FPM
+  apt:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+  loop:
+    - php-fpm
+    - php-cli
+
+- name: Ensure PHP-FPM service is running
+  service:
+    name: php8.1-fpm  # Используйте правильное имя службы для вашей системы
+    state: started
+    enabled: yes
