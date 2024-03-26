@@ -1,0 +1,28 @@
+---
+- name: Создание пользователя и настройка SSH-ключа
+  hosts: test
+  become: yes
+
+  tasks:
+    - name: Создание пользователя user1
+      user:
+        name: user1
+        shell: /bin/bash
+        createhome: yes
+
+    - name: Создание директории .ssh для пользователя user1
+      file:
+        path: /home/user1/.ssh
+        state: directory
+        owner: user1
+        group: user1
+        mode: '0700'
+
+    - name: Установка SSH-ключа для пользователя user1
+      copy:
+        content: "{{ lookup('file', '/home/avolon/ansible/user1_key') }}"
+        dest: /home/user1/.ssh/id_rsa
+        owner: user1
+        group: user1
+        mode: '0600'
+
