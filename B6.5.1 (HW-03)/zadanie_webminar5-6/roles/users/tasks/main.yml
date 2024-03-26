@@ -1,0 +1,23 @@
+---
+- name: Создание пользователя user1
+  user:
+    name: "{{ new_username }}"
+    state: present
+    createhome: yes
+
+- name: Создание директории .ssh в домашней директории пользователя
+  file:
+    path: "/home/{{ new_username }}/.ssh"
+    state: directory
+    owner: "{{ new_username }}"
+    group: "{{ new_username }}"
+    mode: '0700'
+
+
+- name: Копирование зашифрованного SSH-ключа в домашнюю директорию пользователя
+  copy:
+    src: user1_key
+    dest: "/home/{{ new_username }}/.ssh/authorized_keys"
+    owner: "{{ new_username }}"
+    group: "{{ new_username }}"
+    mode: 0600

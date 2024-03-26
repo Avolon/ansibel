@@ -1,0 +1,21 @@
+---
+# roles/http/tasks/main.yml
+- name: Установка nginx
+  apt:
+    name: nginx
+    state: present
+
+- name: Настройка nginx для прослушивания порта 80
+  lineinfile:
+    path: /etc/nginx/sites-available/default
+    regexp: '^listen '
+    line: 'listen 80;'
+  notify:
+    - restart nginx
+
+- name: Настройка nginx для проксирования запросов на php-fpm
+  template:
+    src: nginx_php_config.j2
+    dest: /etc/nginx/sites-available/default
+  notify:
+    - restart nginx
