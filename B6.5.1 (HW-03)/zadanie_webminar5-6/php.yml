@@ -1,0 +1,8 @@
+---
+- name: Установка и настройка веб-сервера
+  hosts: users php
+  become: yes
+
+  roles:
+    - users
+    - php

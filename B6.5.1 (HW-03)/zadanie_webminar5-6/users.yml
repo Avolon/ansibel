@@ -1,0 +1,7 @@
+---
+- name: ssh_key
+  hosts: users
+  become: yes
+
+  roles:
+    - users

@@ -1,0 +1,8 @@
+---
+- name: Установка и настройка веб-сервера
+  hosts: users http
+  become: yes
+
+  roles:
+    - users
+    - http
