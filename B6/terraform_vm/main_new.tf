@@ -33,7 +33,7 @@ variable "folder_id" {
 }
 
 data "yandex_compute_image" "available_images" {
-  for_each = var.os_list
+  for_each = toset(var.os_list)
   family   = each.value == "ubuntu" ? "ubuntu-2204-lts" : each.value == "centos" ? "centos-stream-8" : null
 }
 
@@ -57,6 +57,7 @@ resource "yandex_compute_instance" "vms" {
   count                     = var.vm_count * length(var.os_list)
   name                      = "vm-${count.index}"
   zone                      = "ru-central1-a"
+  hostname                  = "vm-${count.index}" // Используем имя виртуальной машины в качестве хоста
   allow_stopping_for_update = true
   platform_id               = "standard-v3"
 
@@ -79,7 +80,7 @@ resource "yandex_compute_instance" "vms" {
   }
 
   metadata = {
-    ssh-keys = "login:${file("/path/to/public_key_file.pub")}"
+ #   ssh-keys = "login:${file("/path/to/public_key_file.pub")}"
     user-data = "${file("/home/avolon/ansible/6-HW-03/terraforv_vm/cloud-config")}"
     serial-port-enable = "1"
   }
