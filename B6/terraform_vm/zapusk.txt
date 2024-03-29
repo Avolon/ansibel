@@ -1,1 +1,2 @@
+terraform apply -var='vm_count=5' -var='os_list=["ubuntu", "centos"]'
 
